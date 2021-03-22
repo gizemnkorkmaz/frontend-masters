@@ -1,5 +1,3 @@
-
-
 // ###########
 // # Closure #
 // ###########
@@ -7,24 +5,30 @@
 
 // Challenge 1
 const createFunction = () => {
-
+  function createdFunction() {
+    return "hello"
+  }
+  return createdFunction
 };
 
 // UNCOMMENT THESE TO TEST YOUR WORK!
 // const function1 = createFunction();
-// function1();
+// console.log(function1());
 
 
 // Challenge 2
 const createFunctionPrinter = (input) => {
-
+  function returnedFunction() {
+    return input
+  }
+  return returnedFunction
 };
 
 // UNCOMMENT THESE TO TEST YOUR WORK!
 // const printSample = createFunctionPrinter('sample');
-// printSample();
+// console.log(printSample());
 // const printHello = createFunctionPrinter('hello');
-// printHello();
+// console.log(printHello());
 
 
 // Challenge 3
@@ -53,20 +57,34 @@ const jasCounter = outer();
 
 // Challenge 4
 const addByX = (x) => {
-
+  function add(input) {
+    return x + input
+  }
+  return add
 };
 
 const addByTwo = addByX(2);
 
 // now call addByTwo with an input of 1
-
+// console.log(addByTwo(1)); //should return 3
+// console.log(addByTwo(2)); //should return 4
+// console.log(addByTwo(3)); //should return 5
 
 // now call addByTwo with an input of 2
 
 
 // Challenge 5
 const once = (func) => {
-
+  let counter = 0
+  let onceValue
+  function innerFunc(val){
+    if (counter === 0) {
+      onceValue = func(val)
+      counter++
+    }
+    return onceValue
+  }
+  return innerFunc
 };
 
 const onceFunc = once(addByTwo);
@@ -79,7 +97,13 @@ const onceFunc = once(addByTwo);
 
 // Challenge 6
 const after = (count, func) => {
-
+let callbackCounter = 0
+   function inner(value) {
+    if(++callbackCounter === count){
+      func(value)
+    }
+  }
+  return inner
 };
 
 const called = () => console.log('hello');
@@ -92,12 +116,24 @@ const afterCalled = after(3, called);
 
 // Challenge 7
 const delay = (func, wait) => {
-
+  setTimeout(() => func(...args), wait)
 };
 
 
 // Challenge 8
 const russianRoulette = (num) => {
+  let n = 0
+  return () => {
+    if(++n < num){
+      return "click"
+    } else if(n === num) {
+      n++
+      return "bang"
+    } else {
+      return "reload to play again"
+    }
+
+  }
 
 };
 
@@ -108,97 +144,3 @@ const russianRoulette = (num) => {
 // console.log(play()); // should log: 'bang'
 // console.log(play()); // should log: 'reload to play again'
 // console.log(play()); // should log: 'reload to play again'
-
-
-// Challenge 9
-const average = () => {
-
-};
-
-// /*** Uncomment these to check your work! ***/
-// const avgSoFar = average();
-// console.log(avgSoFar()); // should log: 0
-// console.log(avgSoFar(4)); // should log: 4
-// console.log(avgSoFar(8)); // should log: 6
-// console.log(avgSoFar()); // should log: 6
-// console.log(avgSoFar(12)); // should log: 8
-// console.log(avgSoFar()); // should log: 8
-
-
-// Challenge 10
-const makeFuncTester = (arrOfTests) => {
-  
-};
-
-// /*** Uncomment these to check your work! ***/
-// const capLastTestCases = [];
-// capLastTestCases.push(['hello', 'hellO']);
-// capLastTestCases.push(['goodbye', 'goodbyE']);
-// capLastTestCases.push(['howdy', 'howdY']);
-// const shouldCapitalizeLast = makeFuncTester(capLastTestCases);
-// const capLastAttempt1 = str => str.toUpperCase();
-// const capLastAttempt2 = str => str.slice(0, -1) + str.slice(-1).toUpperCase();
-// console.log(shouldCapitalizeLast(capLastAttempt1)); // should log: false
-// console.log(shouldCapitalizeLast(capLastAttempt2)); // should log: true
-
-
-// Challenge 11
-const makeHistory = (limit) => {
-
-};
-
-// /*** Uncomment these to check your work! ***/
-// const myActions = makeHistory(2);
-// console.log(myActions('jump')); // should log: 'jump done'
-// console.log(myActions('undo')); // should log: 'jump undone'
-// console.log(myActions('walk')); // should log: 'walk done'
-// console.log(myActions('code')); // should log: 'code done'
-// console.log(myActions('pose')); // should log: 'pose done'
-// console.log(myActions('undo')); // should log: 'pose undone'
-// console.log(myActions('undo')); // should log: 'code undone'
-// console.log(myActions('undo')); // should log: 'nothing to undo'
-
-
-// Challenge 12
-const blackjack = (array) => {
-
-};
-
-// /*** Uncomment these to check your work! ***/
-
-// /*** DEALER ***/
-// const deal = blackjack([2, 6, 1, 7, 11, 4, 6, 3, 9, 8, 9, 3, 10, 4, 5, 3, 7, 4, 9, 6, 10, 11]);
-
-// /*** PLAYER 1 ***/
-// const i_like_to_live_dangerously = deal(4, 5);
-// console.log(i_like_to_live_dangerously()); // should log: 9
-// console.log(i_like_to_live_dangerously()); // should log: 11
-// console.log(i_like_to_live_dangerously()); // should log: 17
-// console.log(i_like_to_live_dangerously()); // should log: 18
-// console.log(i_like_to_live_dangerously()); // should log: 'bust'
-// console.log(i_like_to_live_dangerously()); // should log: 'you are done!'
-// console.log(i_like_to_live_dangerously()); // should log: 'you are done!'
-
-// /*** BELOW LINES ARE FOR THE BONUS ***/
-
-// /*** PLAYER 2 ***/
-// const i_TOO_like_to_live_dangerously = deal(2, 2);
-// console.log(i_TOO_like_to_live_dangerously()); // should log: 4
-// console.log(i_TOO_like_to_live_dangerously()); // should log: 15
-// console.log(i_TOO_like_to_live_dangerously()); // should log: 19
-// console.log(i_TOO_like_to_live_dangerously()); // should log: 'bust'
-// console.log(i_TOO_like_to_live_dangerously()); // should log: 'you are done!
-// console.log(i_TOO_like_to_live_dangerously()); // should log: 'you are done!
-
-// /*** PLAYER 3 ***/
-// const i_ALSO_like_to_live_dangerously = deal(3, 7);
-// console.log(i_ALSO_like_to_live_dangerously()); // should log: 10
-// console.log(i_ALSO_like_to_live_dangerously()); // should log: 13
-// console.log(i_ALSO_like_to_live_dangerously()); // should log: 'bust'
-// console.log(i_ALSO_like_to_live_dangerously()); // should log: 'you are done!
-// console.log(i_ALSO_like_to_live_dangerously()); // should log: 'you are done!
-
-
-
-
-
