@@ -1,5 +1,31 @@
 // TODO: write `findAll(..)`
-
+function findAll(match, array) {
+	let result = []
+	for (let v of array){
+		if(Object.is(match, v)) {
+			result.push(v)
+		}
+		else if (v == null && match == null) {
+			result.push(v)
+		}
+		else if (typeof match == 'boolean' && typeof v == 'boolean') {
+			if(v == match) {
+				result.push(v)
+			}
+		}
+		else if (typeof v == 'number' && typeof match == 'string' && match.trim() !="" && !Object.is(-0,v)) {
+			if (v == match) {
+				result.push(v)
+			}
+		}
+		else if (typeof match == 'number' && !Object.is(match,-0) && !Object.is(match,NaN) && !Object.is(match,Infinity) && !Object.is(match,-Infinity) && typeof v == 'string' && v.trim() != "") {
+			if (match == v) {
+			  result.push(v);
+			}
+		}
+	}
+	return result
+}
 
 
 // tests:
